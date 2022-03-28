@@ -33,6 +33,11 @@ composer install
 php artisan key:generate
 ```
 
+###### Env [configuration base de donnée]
+```
+cp .env.example .env
+```
+
 ###### Migration tables
 ```
 php artisan migrate
