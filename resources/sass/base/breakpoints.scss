@@ -1,0 +1,23 @@
+@mixin screen($size) {
+    @if $size == xs {
+        @media (max-width: 576px) { @content ; }
+    }
+    @else if $size == sm {
+        @media (max-width: 768px) { @content ; }
+    }
+    @else if $size == md {
+        @media (max-width: 992px) { @content ; }
+    }
+    @else if $size == lg {
+        @media (max-width: 1200px)  { @content ; }
+    }
+    @else if $size == xl {
+        @media (max-width: 1400px)  { @content ; }
+    }
+    @else if $size == xl2 {
+        @media (max-width: 1540px)  { @content ; }
+    }
+    @else if $size == xl3 {
+        @media (max-width: 1740px)  { @content ; }
+    }
+}

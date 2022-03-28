@@ -1,0 +1,24 @@
+.navbar {
+    background: $vert-clair;
+
+    .navbar-brand {
+        font-weight: 700;
+
+        span {
+            color: $white;
+        }
+    }
+
+    .navbar-collapse {
+        flex-grow: 0 !important;
+    }
+}
+
+.cta-add {
+    background: $cta-add;
+    border: 1px solid $cta-add;
+}
+
+.bloc-submit {
+    border-top: 1px solid #aaa;
+}
