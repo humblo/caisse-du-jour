@@ -51,3 +51,7 @@ php artisan db:seed --class=UserSeeder
 ```
 php artisan serve
 ```
+###### Login & mot de passe
+```
+admin@example.com / admin
+```
