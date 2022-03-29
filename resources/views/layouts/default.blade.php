@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Espace membre, </title>
+    <title>Caisse du jour</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ URL::asset('css/app.css') }}" type="text/css" rel="stylesheet"/>
     @guest
