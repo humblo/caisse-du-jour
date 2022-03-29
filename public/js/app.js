@@ -2268,20 +2268,34 @@ function setOption(type) {
   switch (type) {
     case 'billet':
       tab = [5, 10, 20, 50, 100, 200, 500];
+
+      for (var _i = 0, _tab = tab; _i < _tab.length; _i++) {
+        var k = _tab[_i];
+        str += "<option value=\"".concat(k, "\">").concat(k, "</option>");
+      }
+
       break;
 
     case 'piece':
       tab = [1, 2];
+
+      for (var _i2 = 0, _tab2 = tab; _i2 < _tab2.length; _i2++) {
+        var _k = _tab2[_i2];
+        str += "<option value=\"".concat(_k, "\">").concat(_k, "</option>");
+      }
+
       break;
 
     case 'centime':
       tab = [1, 2, 5, 10, 20, 50];
-      break;
-  }
 
-  for (var _i = 0, _tab = tab; _i < _tab.length; _i++) {
-    var k = _tab[_i];
-    str += "<option value=\"".concat(k, "\">").concat(k, "</option>");
+      for (var _i3 = 0, _tab3 = tab; _i3 < _tab3.length; _i3++) {
+        var _k2 = _tab3[_i3];
+        var index = parseFloat(_k2 / 100);
+        str += "<option value=\"".concat(index, "\">").concat(_k2, "</option>");
+      }
+
+      break;
   }
 
   return str;
@@ -2312,7 +2326,7 @@ function calcul(type) {
     var quantite_id = item.id;
     var quantite_value = item.value || 0;
     var indice = quantite_id.split('_')[2];
-    total = parseInt(total) + parseInt(quantite_value * $("#".concat(type, "_operation_").concat(indice)).val());
+    total = total + quantite_value * $("#".concat(type, "_operation_").concat(indice)).val();
   });
   $("#total-".concat(type)).val(total);
   $(".".concat(type, "-value")).html("".concat(total, "\u20AC"));
@@ -2320,7 +2334,7 @@ function calcul(type) {
 
 function totalCaisse() {
   var total = 0;
-  total = parseInt($('#total-piece').val()) + parseInt($('#total-billet').val()) + parseInt($('#total-centime').val());
+  total = parseInt($('#total-piece').val()) + parseInt($('#total-billet').val()) + parseFloat($('#total-centime').val());
   $('#total-caisse').html("".concat(total, "\u20AC"));
 }
 

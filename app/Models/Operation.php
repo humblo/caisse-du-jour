@@ -14,4 +14,8 @@ class Operation extends Model
         'content' => 'array'
     ];
 
+    public function typeoperation()
+    {
+        return $this->belongsTo(TypeOperation::class);
+    }
 }

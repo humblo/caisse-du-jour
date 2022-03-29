@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SigninController;
+use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,4 +27,9 @@ Route::get('dashboard', [PageController::class, 'dashboard'])->name('dashboard')
 Route::any('edit', [PageController::class, 'edit'])->name('edit');
 Route::get('logout', [SigninController::class, 'logout'])->name('logout');
 Route::post('page/delete',[PageController::class,'delete']);
+Route::any('type/view',[TypeController::class,'view'])->name('type');
+Route::get('type/edit/{typeoperation_id}',[TypeController::class,'edit'])->name('type.edit');
+Route::post('type/update/{typeoperation_id}',[TypeController::class,'update'])->name('type.update');
+Route::any('type/delete/{typeoperation_id}',[TypeController::class,'delete'])->name('type.delete');
+Route::any('type/add',[TypeController::class,'add'])->name('type.add');
 //Route::get('/', 'SigninController@index')->name('login');

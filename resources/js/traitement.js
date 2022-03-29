@@ -23,17 +23,25 @@ function setOption(type) {
     switch (type) {
         case 'billet':
             tab = [5, 10, 20, 50, 100, 200, 500];
+            for (let k of tab) {
+                str += `<option value="${k}">${k}</option>`;
+            }
             break;
         case 'piece':
             tab = [1, 2];
+            for (let k of tab) {
+                str += `<option value="${k}">${k}</option>`;
+            }
             break;
         case'centime':
             tab = [1, 2, 5, 10, 20, 50];
+            for (let k of tab) {
+                let index = parseFloat(k/100);
+                str += `<option value="${index}">${k}</option>`;
+            }
             break;
     }
-    for (let k of tab) {
-        str += `<option value="${k}">${k}</option>`;
-    }
+
     return str;
 }
 
@@ -62,7 +70,7 @@ function calcul(type){
         let quantite_id = item.id;
         let quantite_value = item.value || 0;
         let indice = quantite_id.split('_')[2];
-        total = parseInt(total) + parseInt(quantite_value * $(`#${type}_operation_${indice}`).val());
+        total = total + (quantite_value * $(`#${type}_operation_${indice}`).val());
     });
     $(`#total-${type}`).val(total);
     $(`.${type}-value`).html(`${total}€`);
@@ -70,6 +78,6 @@ function calcul(type){
 
 function totalCaisse(){
     let total = 0;
-    total = parseInt($('#total-piece').val()) + parseInt($('#total-billet').val()) + parseInt($('#total-centime').val());
+    total = parseInt($('#total-piece').val()) + parseInt($('#total-billet').val()) + parseFloat($('#total-centime').val());
     $('#total-caisse').html(`${total}€`);
 }
