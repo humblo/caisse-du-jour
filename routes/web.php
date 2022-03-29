@@ -16,20 +16,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
-
-//Route::get('/',[SigninController::class],'index')->name('login');
+// Login
 Route::get('/', [SigninController::class, 'index'])->name('login');
 Route::post('post-login', [SigninController::class, 'login'])->name('post.login');
-Route::get('dashboard', [PageController::class, 'dashboard'])->name('dashboard');
-Route::any('edit', [PageController::class, 'edit'])->name('edit');
 Route::get('logout', [SigninController::class, 'logout'])->name('logout');
-Route::post('page/delete',[PageController::class,'delete']);
-Route::any('type/view',[TypeController::class,'view'])->name('type');
-Route::get('type/edit/{typeoperation_id}',[TypeController::class,'edit'])->name('type.edit');
-Route::post('type/update/{typeoperation_id}',[TypeController::class,'update'])->name('type.update');
-Route::any('type/delete/{typeoperation_id}',[TypeController::class,'delete'])->name('type.delete');
-Route::any('type/add',[TypeController::class,'add'])->name('type.add');
-//Route::get('/', 'SigninController@index')->name('login');
+
+Route::group(['middleware' => 'auth'], function () {
+// Page
+    Route::get('dashboard', [PageController::class, 'dashboard'])->name('dashboard');
+    Route::any('edit', [PageController::class, 'edit'])->name('edit');
+    Route::any('page/update/{operation_id}', [PageController::class, 'update'])->name('page.update');
+    Route::any('page/save/{operation_id}', [PageController::class, 'saved'])->name('page.save');
+    Route::post('page/delete', [PageController::class, 'delete']);
+// Type
+    Route::any('type/view', [TypeController::class, 'view'])->name('type');
+    Route::get('type/edit/{typeoperation_id}', [TypeController::class, 'edit'])->name('type.edit');
+    Route::post('type/update/{typeoperation_id}', [TypeController::class, 'update'])->name('type.update');
+    Route::any('type/delete/{typeoperation_id}', [TypeController::class, 'delete'])->name('type.delete');
+    Route::any('type/add', [TypeController::class, 'add'])->name('type.add');
+});

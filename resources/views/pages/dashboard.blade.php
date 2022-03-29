@@ -36,7 +36,7 @@
                                             <td>{{ \Carbon\Carbon::parse($item['date'])->format('d M Y') }}</td>
                                             <td>
                                                 @php
-                                                $title_type = \App\Models\TypeOperation::where('id',$item['typeoperation_id'])->pluck('title')->first();
+                                                    $title_type = \App\Models\TypeOperation::where('id',$item['typeoperation_id'])->pluck('title')->first();
                                                 @endphp
                                                 {{ $title_type }}
                                             </td>
@@ -45,14 +45,18 @@
                                             <td>{{ $item['ajout'] }}</td>
                                             <td>{{ $item['total'] }}</td>
                                             <td class="actions">
-                                                <a href="" class="btn btn-outline-info">Editer</a>
+                                                <a href="{{ route('page.update',['operation_id'=>$item['id']]) }}"
+                                                   class="btn btn-outline-info">Editer</a>
                                                 <a href="#" class="btn btn-outline-danger delete-operation"
                                                    data-id="{{ $item['id'] }}">Supprimer</a>
                                             </td>
                                         </tr>
                                     @endforeach
                                 @else
-                                    <tr><td colspan="7">Aucune donnée n'est encore enregistrée dans la base de données</td></tr>
+                                    <tr>
+                                        <td colspan="7">Aucune donnée n'est encore enregistrée dans la base de données
+                                        </td>
+                                    </tr>
                                 @endif
                                 </tbody>
                             </table>
