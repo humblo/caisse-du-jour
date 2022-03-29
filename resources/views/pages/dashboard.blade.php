@@ -3,11 +3,6 @@
     <main class="dashboard">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="row mb-3">
-                    <div class="col-md-3">
-                        <a href="{{ route('edit') }}" class="btn btn-outline-dark">+ Ajouter</a>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-sm-12 col-md-3">
                         <div class="mb-3">
@@ -40,17 +35,10 @@
                                         <tr>
                                             <td>{{ \Carbon\Carbon::parse($item['date'])->format('d M Y') }}</td>
                                             <td>
-                                                @switch($item['type'])
-                                                    @case (1)
-                                                    Dépôt de caisse
-                                                    @break
-                                                    @case(2)
-                                                    Remise en banque
-                                                    @break
-                                                    @case(3)
-                                                    Retrait
-                                                    @break
-                                                @endswitch
+                                                @php
+                                                $title_type = \App\Models\TypeOperation::where('id',$item['typeoperation_id'])->pluck('title')->first();
+                                                @endphp
+                                                {{ $title_type }}
                                             </td>
                                             <td>{{ $item['total'] }}</td>
                                             <td>{{ $item['retrait'] }}</td>

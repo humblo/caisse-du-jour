@@ -3,11 +3,6 @@
     <main class="edit">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="row mb-3">
-                    <div class="col-md-3">
-                        <a href="{{ route('dashboard') }}" class="btn btn-outline-dark">&laquo; Tableau de bord</a>
-                    </div>
-                </div>
                 <div class="row g-3">
                     <form name="form-caisse" id="form-caisse" method="post" action="{{ route('edit') }}">
                     @csrf
@@ -20,13 +15,13 @@
                             <div class="col-md-6 mb-3">
                                 <label for="operation" class="form-label">Type d'opération</label>
                                 <select id="operation" name="operation" class="form-select">
-                                    <option value="1">Dépôt de caisse</option>
-                                    <option value="2">Remise en banque</option>
-                                    <option value="3">Retrait</option>
+                                    @foreach($type_operations as $type)
+                                        <option value="{{ $type['id'] }}">{{ $type['title'] }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-md-6 operation-value display-input" id="total-caisse">
-                                0€
+                                0 €
                             </div>
                             <!-- /type d'operation -->
                             <!-- Date --->
@@ -65,7 +60,7 @@
                                     <input name="billet[1][quantite]" id="billet_quantite_1" class="form-control"/>
                                 </div>
                                 <div class="col-md-4 billet-value display-input-1">
-                                    0€
+                                    0 €
                                 </div>
                             </div>
                         </div>
@@ -97,7 +92,7 @@
                                     <input name="piece[1][quantite]" id="piece_quantite_1" class="form-control"/>
                                 </div>
                                 <div class="col-md-4 piece-value display-input-1">
-                                    0€
+                                    0 €
                                 </div>
                             </div>
                         </div>
@@ -120,7 +115,7 @@
                                     <select id="centime_operation_1" name="centime[1][operation]"
                                             class="form-select form-control">
                                         @foreach($centimes as $centime)
-                                            <option value="{{ $centime }}">{{ $centime }}</option>
+                                            <option value="{{ $centime / 100 }}">{{ $centime }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -129,7 +124,7 @@
                                     <input name="centime[1][quantite]" id="centime_quantite_1" class="form-control"/>
                                 </div>
                                 <div class="col-md-4 centime-value display-input-1">
-                                    0€
+                                    0 €
                                 </div>
                             </div>
                         </div>

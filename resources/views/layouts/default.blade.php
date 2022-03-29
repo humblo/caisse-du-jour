@@ -27,6 +27,15 @@
                 @guest
                 @else
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('edit') }}">Ajout opération</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('type') }}">Type opérations</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}">Déconnexion</a>
                     </li>
                 @endguest
