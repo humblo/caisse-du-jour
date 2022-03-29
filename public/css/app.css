@@ -30,10 +30,16 @@
   padding: 5rem 3rem;
 }
 
+.dashboard h1 {
+  text-align: center;
+}
 .dashboard h2 {
   border-bottom: 4px solid #e0d396;
   font-weight: 300;
   line-height: 4rem;
+}
+.dashboard td.actions {
+  text-align: center;
 }
 
 .edit h2 {

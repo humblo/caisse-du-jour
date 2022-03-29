@@ -2174,6 +2174,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./traitement */ "./resources/js/traitement.js");
 
+__webpack_require__(/*! ./dashboard */ "./resources/js/dashboard.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -2207,6 +2209,33 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/js/dashboard.js":
+/*!***********************************!*\
+  !*** ./resources/js/dashboard.js ***!
+  \***********************************/
+/***/ (() => {
+
+$(document).ready(function () {
+  $('.delete-operation').click(function (e) {
+    e.preventDefault();
+    var delete_action = $(this);
+
+    if (confirm("Voulez-vous vraiment supprimer cette opération!") == false) {
+      return false;
+    }
+
+    var data_id = $(this).attr('data-id');
+    axios.post('/page/delete', {
+      data_id: data_id
+    }).then(function (response) {
+      $(delete_action).parent().parent().hide('slow');
+      $('#total-caisse h1').html("".concat(response.data.total_caisse, " \u20AC"));
+    });
+  });
+});
+
+/***/ }),
+
 /***/ "./resources/js/traitement.js":
 /*!************************************!*\
   !*** ./resources/js/traitement.js ***!
@@ -2214,7 +2243,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /***/ (() => {
 
 $(document).ready(function () {
-  $('button').click(function (e) {
+  $('button.cta-add').click(function (e) {
     e.preventDefault();
     var type = $("#".concat(this.id)).attr('data-type');
     var counter = $("#counter-".concat(type)).val();
@@ -2272,7 +2301,6 @@ function suppression() {
     e.preventDefault();
     var type = $(this).parent().parent('.row').parent().attr('data-type');
     $(this).parent().parent('.row').remove();
-    console.log(type);
     calcul(type);
     totalCaisse();
   });
@@ -2293,7 +2321,6 @@ function calcul(type) {
 function totalCaisse() {
   var total = 0;
   total = parseInt($('#total-piece').val()) + parseInt($('#total-billet').val()) + parseInt($('#total-centime').val());
-  console.log(total);
   $('#total-caisse').html("".concat(total, "\u20AC"));
 }
 

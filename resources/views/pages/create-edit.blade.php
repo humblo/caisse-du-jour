@@ -3,8 +3,13 @@
     <main class="edit">
         <div class="container">
             <div class="row justify-content-center">
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <a href="{{ route('dashboard') }}" class="btn btn-outline-dark">&laquo; Tableau de bord</a>
+                    </div>
+                </div>
                 <div class="row g-3">
-                    <form name="" method="" action="">
+                    <form name="form-caisse" id="form-caisse" method="post" action="{{ route('edit') }}">
                     @csrf
                     <!-- 1 -->
                         <div class="mb-3">
@@ -14,11 +19,10 @@
                         <div class="row p-4">
                             <div class="col-md-6 mb-3">
                                 <label for="operation" class="form-label">Type d'opération</label>
-                                <select id="operation" class="form-select">
-                                    <option selected>Choisir...</option>
-                                    <option>Dépôt de caisse</option>
-                                    <option>Remise en banque</option>
-                                    <option>Retrait</option>
+                                <select id="operation" name="operation" class="form-select">
+                                    <option value="1">Dépôt de caisse</option>
+                                    <option value="2">Remise en banque</option>
+                                    <option value="3">Retrait</option>
                                 </select>
                             </div>
                             <div class="col-md-6 operation-value display-input" id="total-caisse">
@@ -28,7 +32,7 @@
                             <!-- Date --->
                             <div class="col-md-6 mb-3">
                                 <label for="date" class="form-label">Date</label>
-                                <input type="date" class="form-control" id="date">
+                                <input type="date" class="form-control" name="date" id="date">
                             </div>
                             <div class="col-md-6">
                                 &nbsp;

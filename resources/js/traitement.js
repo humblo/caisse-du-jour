@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('button').click(function (e) {
+    $('button.cta-add').click(function (e) {
         e.preventDefault();
         let type = $(`#${this.id}`).attr('data-type');
         let counter = $(`#counter-${type}`).val();
@@ -51,7 +51,6 @@ function suppression() {
         e.preventDefault();
         let type = $(this).parent().parent('.row').parent().attr('data-type');
         $(this).parent().parent('.row').remove();
-        console.log(type);
         calcul(type);
         totalCaisse();
     });
@@ -72,6 +71,5 @@ function calcul(type){
 function totalCaisse(){
     let total = 0;
     total = parseInt($('#total-piece').val()) + parseInt($('#total-billet').val()) + parseInt($('#total-centime').val());
-    console.log(total);
     $('#total-caisse').html(`${total}€`);
 }
