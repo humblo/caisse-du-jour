@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\OperationTrait;
 use App\Models\Operation;
 use App\Models\TypeOperation;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
+    use OperationTrait;
     //
     static $billets = [5, 10, 20, 50, 100, 200, 500];
     static $pieces = [1, 2];
@@ -19,11 +21,9 @@ class PageController extends Controller
             return redirect('/');
         }
         $operations = Operation::all();
+        $total_caisse = $this->total_caisse();
 
-        $depot = Operation::where('typeoperation_id', 1)->sum('total');
-        $remise = Operation::where('typeoperation_id', 2)->sum('total');
-        $retrait = Operation::where('typeoperation_id', 3)->sum('total');
-        $total_caisse = $depot - $retrait - $remise > 0 ? $depot - $retrait - $remise : 0.00;
+
         return view('pages.dashboard', [
             'operations' => $operations,
             'total_caisse' => $total_caisse,
@@ -59,10 +59,7 @@ class PageController extends Controller
     {
         $result = Operation::where('id',$request->post('data_id'))->delete();
         if ($result) {
-            $depot = Operation::where('typeoperation_id', 1)->sum('total');
-            $remise = Operation::where('typeoperation_id', 2)->sum('total');
-            $retrait = Operation::where('typeoperation_id', 3)->sum('total');
-            $total_caisse = $depot - $retrait - $remise > 0 ? $depot - $retrait - $remise : '0 €';
+            $total_caisse = $this->total_caisse() > 0 ? $this->total_caisse() : '0 €';
             return response()->json([
                 'total_caisse' => $total_caisse,
             ]);
