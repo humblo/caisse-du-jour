@@ -17,9 +17,6 @@ class PageController extends Controller
 
     public function dashboard()
     {
-        if (!auth()->check()) {
-            return redirect('/');
-        }
         $operations = Operation::all();
         $total_caisse = $this->total_caisse();
 
