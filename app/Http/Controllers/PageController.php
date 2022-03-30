@@ -18,13 +18,14 @@ class PageController extends Controller
         if (!auth()->check()) {
             return redirect('/');
         }
-        $data = Operation::all()->toArray();
+        $operations = Operation::all();
+
         $depot = Operation::where('typeoperation_id', 1)->sum('total');
         $remise = Operation::where('typeoperation_id', 2)->sum('total');
         $retrait = Operation::where('typeoperation_id', 3)->sum('total');
         $total_caisse = $depot - $retrait - $remise > 0 ? $depot - $retrait - $remise : 0.00;
         return view('pages.dashboard', [
-            'data' => $data,
+            'operations' => $operations,
             'total_caisse' => $total_caisse,
         ]);
     }

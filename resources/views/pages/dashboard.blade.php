@@ -30,25 +30,22 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @if(!empty($data))
-                                    @foreach($data as $item)
+                                @if($operations)
+                                    @foreach($operations as $operation)
                                         <tr>
-                                            <td>{{ \Carbon\Carbon::parse($item['date'])->format('d M Y') }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($operation['date'])->format('d M Y') }}</td>
                                             <td>
-                                                @php
-                                                    $title_type = \App\Models\TypeOperation::where('id',$item['typeoperation_id'])->pluck('title')->first();
-                                                @endphp
-                                                {{ $title_type }}
+                                                {{ $operation->typeoperation->title }}
                                             </td>
-                                            <td>{{ $item['total'] }}</td>
-                                            <td>{{ $item['retrait'] }}</td>
-                                            <td>{{ $item['ajout'] }}</td>
-                                            <td>{{ $item['total'] }}</td>
+                                            <td>{{ $operation['total'] }}</td>
+                                            <td>{{ $operation['retrait'] }}</td>
+                                            <td>{{ $operation['ajout'] }}</td>
+                                            <td>{{ $operation['total'] }}</td>
                                             <td class="actions">
-                                                <a href="{{ route('page.update',['operation_id'=>$item['id']]) }}"
+                                                <a href="{{ route('page.update',['operation_id'=>$operation['id']]) }}"
                                                    class="btn btn-outline-info">Editer</a>
                                                 <a href="#" class="btn btn-outline-danger delete-operation"
-                                                   data-id="{{ $item['id'] }}">Supprimer</a>
+                                                   data-id="{{ $operation['id'] }}">Supprimer</a>
                                             </td>
                                         </tr>
                                     @endforeach

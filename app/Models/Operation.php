@@ -16,6 +16,6 @@ class Operation extends Model
 
     public function typeoperation()
     {
-        return $this->belongsTo(TypeOperation::class);
+        return $this->belongsTo(TypeOperation::class,'typeoperation_id');
     }
 }
