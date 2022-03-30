@@ -2255,6 +2255,7 @@ $(document).ready(function () {
     $('#box-hidden .quantite').attr('name', "".concat(type, "[").concat(counter_cumul, "][quantite]"));
     $('#box-hidden .quantite').attr('id', "".concat(type, "_quantite_").concat(counter_cumul));
     $(".box-".concat(type)).append($("#box-hidden").html());
+    $("#counter-".concat(type)).val(counter_cumul);
     saisie();
     suppression();
   });

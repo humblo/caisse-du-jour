@@ -11,6 +11,7 @@ $(document).ready(function () {
         $('#box-hidden .quantite').attr('name', `${type}[${counter_cumul}][quantite]`);
         $('#box-hidden .quantite').attr('id', `${type}_quantite_${counter_cumul}`);
         $(`.box-${type}`).append($("#box-hidden").html());
+        $(`#counter-${type}`).val(counter_cumul);
         saisie();
         suppression();
     });
